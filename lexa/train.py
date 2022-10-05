@@ -117,7 +117,7 @@ def main(logdir, config):
       for idx in range(num_goals):
         eval_envs[0].set_goal_idx(idx)
         eval_policy = functools.partial(agent, training=False)
-        sim_out = tools.simulate(eval_policy, eval_envs, episodes=1,agent_state = previous_agent_state)
+        sim_out = tools.simulate(eval_policy, eval_envs, episodes=1,previous_agent_state = previous_agent_state)
         obs, eps_data, previous_agent_state = sim_out[4], sim_out[6], sim_out[5]
         ep_data_across_goals.append(process_eps_data(eps_data))
         video = eval_envs[0]._convert([t['image'] for t in eval_envs[0]._episode])
