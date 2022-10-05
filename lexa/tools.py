@@ -209,7 +209,7 @@ def log_eval_metrics(logger, log_prefix, eval_dir, num_eval_eps):
         logger.scalar(log_prefix + 'avg/'+ key, _avg)
     logger.write()
 
-def simulate(agent, envs, steps=0, episodes=0, state=None):
+def simulate(agent, envs, steps=0, episodes=0, state=None, prev_agent_state=None):
   # Initialize or unpack simulation state.
   if state is None:
     step, episode = 0, 0
@@ -219,6 +219,8 @@ def simulate(agent, envs, steps=0, episodes=0, state=None):
     agent_state = None
   else:
     step, episode, done, length, obs, agent_state = state
+  if prev_agent_state is not None:
+    agent_state = prev_agent_state  
   all_rewards = []
   #all_gt_rewards = []
   ep_data_lst= []
